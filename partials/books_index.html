@@ -1,0 +1,52 @@
+<select ng-model="category" ng-options="category as category for category in categories">
+</select>
+
+<select ng-model="genre" ng-options="genre as genre for genre in genres">
+</select>
+
+<div class="right-inner-addon" id="search-page-box">
+  <i class="glyphicon glyphicon-search"></i>
+  <input type="search" ng-model="searchText" class="form-control">
+</div>
+
+<!-- Books -->
+<div class="book-gallery">
+  <div class="book col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="book in filtered_booklist = (booklist | filter: categoryFilter | filter: genreFilter | filter:isInSearchText) | pagination: currPage*itemsInPage | limitTo: itemsInPage ">
+    <!-- <img src="{{ book.cover }}" class="img-responsive"/> -->
+    <a href="#book/{{book.id}}">{{ book.name }}</a> <br/>
+    by {{ book.author.name}} <br/>
+    by {{ book.genre.category }} <br/>
+    by {{ book.genre.name }} <br/>
+    {{ book.likes }} <br/>
+    {{ book.published_relative }} <br/>
+    <br/>
+  </div>
+</div>
+
+
+<nav ng-show="booklist.length" id="page_nav" class="pull-right">
+  <ul class="pagination" ng-repeat="num in pageNumbers(filtered_booklist.length)">
+
+    <!-- Previous button -->
+    <li ng-show="num == 0" ng-class="{disabled: disabled('prev', filtered_booklist.length)}">
+      <a ng-click="$parent.currPage=$parent.currPage-1" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <!-- Page numbers -->
+    <li ng-class="{active: currPage == num}" ng-show="(num < 5 || num <= currPage + 2) && (num > numOfPages(filtered_booklist.length) - 6 || num >= currPage - 2)">
+      <a ng-click="$parent.currPage=num">{{ num + 1 }}</a>
+    </li>
+
+    <!-- Next button -->
+    <li ng-show="num == numOfPages(filtered_booklist.length) - 1" ng-class="{disabled: disabled('next', filtered_booklist.length)}">
+      <a ng-click="$parent.currPage=$parent.currPage+1" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+  </ul><br/>
+  <!-- Page indicator -->
+  <div ng-show="numOfPages(filtered_booklist.length)" class="text-center">Page {{currPage + 1}} of {{ numOfPages(filtered_booklist.length) }}</div>
+</nav>
