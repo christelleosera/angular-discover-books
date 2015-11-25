@@ -1,6 +1,28 @@
-.book-gallery
-  height: 500px
-  
+= vendor-prefix($name, $argument)
+  -webkit-#{$name}: #{$argument}
+  -ms-#{$name}: #{$argument}
+  -moz-#{$name}: #{$argument}
+  -o-#{$name}: #{$argument}
+  #{$name}: #{$argument}
+
+$light-green: #abd733
+$light-green-fade: rgba(171, 215, 51, 0.6)
+$dark-green: #6b812e
+$dark-green-fade: rgba(107, 129, 46, 0.6)
+$cream: #f8f6f2
+
+.container-fluid
+  padding: 0
+
+.top-row
+  margin-top: 50px
+
+.top-row .form-control
+  border-color: $dark-green
+
+.top-row div
+  margin-bottom: 10px
+
 .disabled
   pointer-events: none
 
@@ -15,3 +37,98 @@
   right: 0
   padding: 10px 12px
   pointer-events: none
+  color: $light-green
+
+.book
+  border: 2px solid #ddd
+  padding: 8px
+  +vendor-prefix(border-radius, 10px)
+  background-color: #fff
+
+.book img
+  display: block
+  margin: auto
+
+.book .title
+  margin-bottom: 0
+  min-height: 38px
+  max-height: 38px
+  overflow: hidden
+
+.book .title a
+  color: $dark-green
+  font-weight: 900
+
+.book .author
+  margin-top: 5px
+
+.book .likes-published
+  margin-bottom: 0
+
+.book .glyphicon
+  margin-right: 5px
+  color: light-green
+
+.pagination
+  margin-bottom: 0
+
+.pagination > li > a,
+.pagination > li > a:hover
+  color: #000
+
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus
+  background-color: $light-green
+  border-color: $light-green
+
+#page-nav
+  margin-bottom: 50px
+
+.book-header
+  background-color: $dark-green-fade
+
+.book-header .container
+  padding-top: 40px
+  padding-bottom: 40px
+
+.book-header .book-title
+  color: #000
+
+.book-header .book-description
+  margin: 40px 0 40px 0
+
+.book-header .book-categories-lbl
+  margin-bottom: 0
+
+.book-header .book-categories
+  margin-top: 0
+
+.book-header h5
+  margin-top: 30px
+
+.book-header .glyphicon
+  margin-right: 5px
+
+.book-page
+  background-color: $light-green-fade
+  padding-bottom: 80px
+
+.book-intro
+  background-color: $cream
+  padding-top: 40px
+  padding-bottom: 40px
+
+.book-intro p
+  margin: 40px 0 40px 0
+  font-size: 18px
+
+.book-author-info img
+  display: block
+  margin: auto
+
+.book-footer
+  padding-top: 20px
+
+.book-footer h5
+  margin-bottom: 30px

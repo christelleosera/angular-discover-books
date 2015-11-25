@@ -1,52 +1,82 @@
-<select ng-model="category" ng-options="category as category for category in categories">
-</select>
+<div class="container">
+  <!-- Selectors and search box -->
+  <div class="form-group row top-row">
 
-<select ng-model="genre" ng-options="genre as genre for genre in genres">
-</select>
+    <!-- Select category (Fiction / Non-Fiction) -->
+    <div id="category-selector" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <select ng-model="category" ng-options="category as category for category in categories" class="form-control">
+      </select>
+    </div>
 
-<div class="right-inner-addon" id="search-page-box">
-  <i class="glyphicon glyphicon-search"></i>
-  <input type="search" ng-model="searchText" class="form-control">
-</div>
+    <!-- Select genre -->
+    <div id="genre-selector" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <select ng-model="genre" ng-options="genre as genre for genre in genres" class="form-control">
+      </select>
+    </div>
 
-<!-- Books -->
-<div class="book-gallery">
-  <div class="book col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="book in filtered_booklist = (booklist | filter: categoryFilter | filter: genreFilter | filter:isInSearchText) | pagination: currPage*itemsInPage | limitTo: itemsInPage ">
-    <!-- <img src="{{ book.cover }}" class="img-responsive"/> -->
-    <a href="#book/{{book.id}}">{{ book.name }}</a> <br/>
-    by {{ book.author.name}} <br/>
-    by {{ book.genre.category }} <br/>
-    by {{ book.genre.name }} <br/>
-    {{ book.likes }} <br/>
-    {{ book.published_relative }} <br/>
-    <br/>
+    <!-- Search by title or author -->
+    <div id="search-box" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="right-inner-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        <input type="search" ng-model="searchText" class="form-control" placeholder="Search books by title or author">
+      </div>
+    </div>
+  </div>
+
+  <!-- Books -->
+  <div class="book-gallery row" ng-show="filteredBooklist.length">
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="book in filteredBooklist = (booklist | filter: categoryFilter | filter: genreFilter | filter:isInSearchText) | pagination: currPage*itemsInPage | limitTo: itemsInPage ">
+      
+      <!-- Book ng-repeat children -->
+      <div class="book">
+        <a href="#book/{{book.id}}"><img ng-src="{{ book.cover }}" class="img-responsive"/></a>
+        <div class="title-author">
+          <div class="title h4"><a href="#book/{{book.id}}">{{ book.name }}</a></div>
+          <div class="author h5">by {{ book.author.name}}</div>
+        </div>
+        <div class="h6 likes-published text-bottom">
+          <span class="likes"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>{{ book.likes }}</span>
+          <span class="published-date pull-right">{{ book.published_relative }}</span>
+        </div>
+      </div>
+      <br/>
+    </div>
+
+  </div>
+
+  <!-- Search result display when nothing matches -->
+  <div class="well well-lg" ng-hide="filteredBooklist.length">
+    <h4>Sorry, your search and filters combination did not match any books.</h4>
+  </div>
+
+  <!-- Pagination shown when necessary () -->
+  <div ng-show="filteredBooklist.length" id="page-nav" class="text-center" ng-show="numOfPages(filteredBooklist.length)">
+    <div class="pager-container row">
+      <ul class="pagination">
+
+        <!-- Previous button -->
+        <li ng-class="{disabled: disabled('prev', filteredBooklist.length)}">
+          <a ng-click="currPage=currPage-1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <!-- Page numbers -->
+        <li ng-repeat="num in pageNumbers(filteredBooklist.length)" ng-class="{active: currPage == num}" ng-show="(num < 5 || num <= currPage + 2) && (num > numOfPages(filteredBooklist.length) - 6 || num >= currPage - 2)">
+          <a ng-click="$parent.currPage=num">{{ num + 1 }}</a>
+        </li>
+
+        <!-- Next button -->
+        <li ng-class="{disabled: disabled('next', filteredBooklist.length)}">
+          <a ng-click="currPage=currPage+1" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+
+      </ul><br/>
+
+      <!-- Page indicator -->
+      <div class="text-center">Page {{currPage + 1}} of {{ numOfPages(filteredBooklist.length) }}</div>
+    </div>
   </div>
 </div>
-
-
-<nav ng-show="booklist.length" id="page_nav" class="pull-right">
-  <ul class="pagination" ng-repeat="num in pageNumbers(filtered_booklist.length)">
-
-    <!-- Previous button -->
-    <li ng-show="num == 0" ng-class="{disabled: disabled('prev', filtered_booklist.length)}">
-      <a ng-click="$parent.currPage=$parent.currPage-1" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-
-    <!-- Page numbers -->
-    <li ng-class="{active: currPage == num}" ng-show="(num < 5 || num <= currPage + 2) && (num > numOfPages(filtered_booklist.length) - 6 || num >= currPage - 2)">
-      <a ng-click="$parent.currPage=num">{{ num + 1 }}</a>
-    </li>
-
-    <!-- Next button -->
-    <li ng-show="num == numOfPages(filtered_booklist.length) - 1" ng-class="{disabled: disabled('next', filtered_booklist.length)}">
-      <a ng-click="$parent.currPage=$parent.currPage+1" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-
-  </ul><br/>
-  <!-- Page indicator -->
-  <div ng-show="numOfPages(filtered_booklist.length)" class="text-center">Page {{currPage + 1}} of {{ numOfPages(filtered_booklist.length) }}</div>
-</nav>

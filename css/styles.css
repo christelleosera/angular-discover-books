@@ -1,5 +1,14 @@
-.book-gallery {
-  height: 500px; }
+.container-fluid {
+  padding: 0; }
+
+.top-row {
+  margin-top: 50px; }
+
+.top-row .form-control {
+  border-color: #6b812e; }
+
+.top-row div {
+  margin-bottom: 10px; }
 
 .disabled {
   pointer-events: none; }
@@ -14,6 +23,105 @@
   position: absolute;
   right: 0;
   padding: 10px 12px;
-  pointer-events: none; }
+  pointer-events: none;
+  color: #abd733; }
+
+.book {
+  border: 2px solid #ddd;
+  padding: 8px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #fff; }
+
+.book img {
+  display: block;
+  margin: auto; }
+
+.book .title {
+  margin-bottom: 0;
+  min-height: 38px;
+  max-height: 38px;
+  overflow: hidden; }
+
+.book .title a {
+  color: #6b812e;
+  font-weight: 900; }
+
+.book .author {
+  margin-top: 5px; }
+
+.book .likes-published {
+  margin-bottom: 0; }
+
+.book .glyphicon {
+  margin-right: 5px;
+  color: light-green; }
+
+.pagination {
+  margin-bottom: 0; }
+
+.pagination > li > a,
+.pagination > li > a:hover {
+  color: #000; }
+
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus {
+  background-color: #abd733;
+  border-color: #abd733; }
+
+#page-nav {
+  margin-bottom: 50px; }
+
+.book-header {
+  background-color: rgba(107, 129, 46, 0.6); }
+
+.book-header .container {
+  padding-top: 40px;
+  padding-bottom: 40px; }
+
+.book-header .book-title {
+  color: #000; }
+
+.book-header .book-description {
+  margin: 40px 0 40px 0; }
+
+.book-header .book-categories-lbl {
+  margin-bottom: 0; }
+
+.book-header .book-categories {
+  margin-top: 0; }
+
+.book-header h5 {
+  margin-top: 30px; }
+
+.book-header .glyphicon {
+  margin-right: 5px; }
+
+.book-page {
+  background-color: rgba(171, 215, 51, 0.6);
+  padding-bottom: 80px; }
+
+.book-intro {
+  background-color: #f8f6f2;
+  padding-top: 40px;
+  padding-bottom: 40px; }
+
+.book-intro p {
+  margin: 40px 0 40px 0;
+  font-size: 18px; }
+
+.book-author-info img {
+  display: block;
+  margin: auto; }
+
+.book-footer {
+  padding-top: 20px; }
+
+.book-footer h5 {
+  margin-bottom: 30px; }
 
 /*# sourceMappingURL=styles.css.map */
