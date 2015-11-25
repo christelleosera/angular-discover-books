@@ -11,6 +11,9 @@ booksApp.controller('mainCtrl',
     $scope.genres = ['books about'];
     $scope.genre = $scope.genres[0];
 
+    // Lorempixel categories
+    var imgPlaceholder = ['abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife', 'fashion', 'people', 'nature', 'sports', 'technics', 'transport']
+
     // Fetch JSON
     $http.get('data/book.json').success(function(data) {
       $scope.booklist = data;    
@@ -19,6 +22,9 @@ booksApp.controller('mainCtrl',
         entry.published_relative = moment(entry.published).fromNow();
         entry.published = moment(entry.published).format('MMMM D, YYYY');
         $scope.genres.push(entry.genre.name);
+
+        // Randomizing the placeholder images
+        entry.cover = entry.cover + imgPlaceholder[Math.floor(Math.random() * 13)] + '/' + Math.ceil(Math.random()*10);
       });
 
       $scope.genres = jQuery.unique($scope.genres);

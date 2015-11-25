@@ -25,7 +25,7 @@
 
   <!-- Books -->
   <div class="book-gallery row" ng-show="filteredBooklist.length">
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="book in filteredBooklist = (booklist | filter: categoryFilter | filter: genreFilter | filter:isInSearchText) | pagination: currPage*itemsInPage | limitTo: itemsInPage ">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" ng-repeat="book in filteredBooklist = (booklist | filter: categoryFilter | filter: genreFilter | filter:isInSearchText) | pagination: currPage*itemsInPage | limitTo: itemsInPage ">
       
       <!-- Book ng-repeat children -->
       <div class="book">
