@@ -32,14 +32,14 @@ A single page application written in AngularJS that displays the book objects in
 ##Run locally
 1. Clone this repository
 2. Install http-server globally
-```
-npm install http-server -g
-```
+  ```
+  npm install http-server -g
+  ```
 3. Go to the enclosing folder of the cloned repository
 4. Run
-```
-http-server angular-discover-books
-```
+  ```
+  http-server angular-discover-books
+  ```
 5. You can now visit `http://localhost:8080` to view the app.
 
 ##Hosted
